@@ -19,7 +19,10 @@ app = Dash(__name__)
 app.layout = html.Div(children=[
     html.Div(dcc.Dropdown(df['year_release'].unique())),
     html.Div(dcc.Graph(id='new', figure=px.line(new_df, x=new_df.index,
-                                                y='rating')))])
+                                                y='rating'))),
+    html.Div(dcc.RangeSlider(min(df['year_release'].unique()), max(df['year_release'].unique()), step=1,
+                             marks={i: '{}'.format(i) for i in
+                                    range(min(df['year_release'].unique()), max(df['year_release'].unique()))}))])
 
 if __name__ == '__main__':
     app.run_server(debug=True)
